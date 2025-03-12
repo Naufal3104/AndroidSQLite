@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AndroidSQLite</string>
+    <string name="kode_pelanggan">Kode Pelanggan</string>
+    <string name="baru">Baru</string>
+    <string name="hapus">Hapus</string>
+    <string name="simpan">Simpan</string>
+    <string name="ubah">Ubah</string>
+    <string name="masukkan_kode_pelanggan">Masukkan Kode Pelanggan</string>
+    <string name="masukkan_nama">Masukkan Nama</string>
+    <string name="nama_pelanggan">Nama Pelanggan</string>
+    <string name="no_telp">No Telp</string>
+</resources>
