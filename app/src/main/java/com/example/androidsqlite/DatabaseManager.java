@@ -12,10 +12,13 @@ public class DatabaseManager {
     private static final String ROW_ID = "_id";
     private static final String ROW_NAMA = "nama";
     private static final String ROW_TELP = "telp";
+    private static final String ROW_EMAIL = "email";
+    private static final String ROW_JARAK = "jarak";
+    private static final String ROW_POINT = "point";
     private static final String NAMA_DB = "database1";
     private static final String NAMA_TABEL = "tblpelanggan";
     private static final int DB_VERSION = 3;
-    private static final String CREATE_TABLE = "create table IF NOT EXISTS " + NAMA_TABEL + " (" + ROW_ID + " integer PRIMARY KEY AUTOINCREMENT, " + ROW_NAMA + " text," + ROW_TELP + " text)";
+    private static final String CREATE_TABLE = "create table IF NOT EXISTS " + NAMA_TABEL + " (" + ROW_ID + " integer PRIMARY KEY AUTOINCREMENT, " + ROW_NAMA + " text," + ROW_TELP + " text," + ROW_EMAIL + " text, " + ROW_JARAK + " integer, " + ROW_POINT + " integer)";
 
     private final Context context;
     private DatabaseOpenHelper dbHelper;
@@ -56,11 +59,14 @@ public class DatabaseManager {
         dbHelper.close();
     }
 
-    public void UpdateRecord(int iId, String sName, String stelp) {
+    public void UpdateRecord(int iId, String sName, String stelp, String sEmail, int iJarak, int iPoint) {
         ContentValues values = new ContentValues();
         values.put(ROW_ID, iId);
         values.put(ROW_NAMA, sName);
         values.put(ROW_TELP, stelp);
+        values.put(ROW_EMAIL, sEmail);
+        values.put(ROW_JARAK, iJarak);
+        values.put(ROW_POINT, iPoint);
         try {
             db.update(NAMA_TABEL, values, ROW_ID + "=" + iId, null);
         } catch (Exception e) {
@@ -80,11 +86,14 @@ public class DatabaseManager {
         }
     }
 
-    public void addRow(int Iid, String anama, String atelp) {
+    public void addRow(int Iid, String anama, String atelp, String aEmail, int iJarak, int iPoint) {
         ContentValues values = new ContentValues();
         values.put(ROW_ID, Iid);
         values.put(ROW_NAMA, anama);
         values.put(ROW_TELP, atelp);
+        values.put(ROW_EMAIL, aEmail);
+        values.put(ROW_JARAK, iJarak);
+        values.put(ROW_POINT, iPoint);
         try {
             db.insert(NAMA_TABEL, null, values);
         } catch (Exception e) {
@@ -97,7 +106,7 @@ public class DatabaseManager {
         ArrayList<ArrayList<Object>> dataArray = new ArrayList<>();
         Cursor cur;
         try {
-            cur = db.query(NAMA_TABEL, new String[]{ROW_ID, ROW_NAMA, ROW_TELP}, null, null, null, null, null);
+            cur = db.query(NAMA_TABEL, new String[]{ROW_ID, ROW_NAMA, ROW_TELP, ROW_EMAIL, ROW_JARAK, ROW_POINT}, null, null, null, null, null);
             cur.moveToFirst();
             if (!cur.isAfterLast()) {
                 do {
@@ -105,6 +114,9 @@ public class DatabaseManager {
                     dataList.add(cur.getLong(0));
                     dataList.add(cur.getString(1));
                     dataList.add(cur.getString(2));
+                    dataList.add(cur.getString(3));
+                    dataList.add(cur.getInt(4));
+                    dataList.add(cur.getInt(5));
                     dataArray.add(dataList);
                 } while (cur.moveToNext());
             }

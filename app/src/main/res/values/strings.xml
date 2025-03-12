@@ -9,4 +9,7 @@
     <string name="masukkan_nama">Masukkan Nama</string>
     <string name="nama_pelanggan">Nama Pelanggan</string>
     <string name="no_telp">No Telp</string>
+    <string name="point_reward">Point Reward</string>
+    <string name="total_jarak_tempuh">Total Jarak Tempuh</string>
+    <string name="email">Email</string>
 </resources>

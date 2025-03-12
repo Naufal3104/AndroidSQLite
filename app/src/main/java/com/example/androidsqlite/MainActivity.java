@@ -13,7 +13,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
     DatabaseManager dm;
-    private EditText eNm, eTelp, ekode;
+    private EditText eNm, eTelp, ekode, eEmail, eJarak, ePoint;
     private Button bBaru, bSimpan, bUbah, bHapus;
     TableLayout tabel4data;
 
@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         ekode = (EditText) findViewById(R.id.edTextKode);
         eNm = (EditText) findViewById(R.id.edTextNama);
         eTelp = (EditText) findViewById(R.id.edTextPhone);
+        eEmail = (EditText) findViewById(R.id.editTextEmail);
+        eJarak = (EditText) findViewById(R.id.editTextJarak);
+        ePoint = (EditText) findViewById(R.id.editTextPoint);
         bSimpan = (Button) findViewById(R.id.btnSimpan);
         bUbah = (Button) findViewById(R.id.btnUbah);
         bHapus = (Button) findViewById(R.id.btnHapus);
@@ -63,7 +66,13 @@ public class MainActivity extends AppCompatActivity {
 
     protected void simpanTable() {
         try {
-            dm.addRow(Integer.parseInt(ekode.getText().toString()), eNm.getText().toString(), eTelp.getText().toString());
+            dm.addRow(Integer.parseInt(ekode.getText().toString()),
+                    eNm.getText().toString(),
+                    eTelp.getText().toString(),
+                    eEmail.getText().toString(),
+                    Integer.parseInt(eJarak.getText().toString()),
+                    Integer.parseInt(ePoint.getText().toString()));
+
             Toast.makeText(getBaseContext(), eNm.getText().toString() + ", berhasil disimpan", Toast.LENGTH_SHORT).show();
             updateTable();
             kosongkanField();
@@ -75,7 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
     protected void ubahTable() {
         try {
-            dm.UpdateRecord(Integer.parseInt(ekode.getText().toString()), eNm.getText().toString(), eTelp.getText().toString());
+            dm.addRow(Integer.parseInt(ekode.getText().toString()),
+                    eNm.getText().toString(),
+                    eTelp.getText().toString(),
+                    eEmail.getText().toString(),
+                    Integer.parseInt(eJarak.getText().toString()),
+                    Integer.parseInt(ePoint.getText().toString()));
             Toast.makeText(getBaseContext(), eNm.getText().toString() + ", berhasil diubah", Toast.LENGTH_SHORT).show();
             updateTable();
             kosongkanField();
@@ -112,20 +126,42 @@ public class MainActivity extends AppCompatActivity {
             TableRow tabelBaris = new TableRow(this);
             ArrayList<Object> baris = data.get(posisi);
             TextView idTxt = new TextView(this);
+
             idTxt.setTextSize(18);
             idTxt.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
             idTxt.setText(" " + baris.get(0).toString() + ".");
             tabelBaris.addView(idTxt);
+
             TextView namaTxt = new TextView(this);
             namaTxt.setTextSize(18);
             namaTxt.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             namaTxt.setText(baris.get(1).toString());
             tabelBaris.addView(namaTxt);
+
             TextView TelpTxt = new TextView(this);
             TelpTxt.setTextSize(18);
             TelpTxt.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             TelpTxt.setText(baris.get(2).toString());
             tabelBaris.addView(TelpTxt);
+
+            TextView emailTxt = new TextView(this);
+            emailTxt.setTextSize(18);
+            emailTxt.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            emailTxt.setText(baris.get(3).toString()); // Email
+            tabelBaris.addView(emailTxt);
+
+            TextView jarakTxt = new TextView(this);
+            jarakTxt.setTextSize(18);
+            jarakTxt.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            jarakTxt.setText(baris.get(4).toString()); // Jarak
+            tabelBaris.addView(jarakTxt);
+
+            TextView pointTxt = new TextView(this);
+            pointTxt.setTextSize(18);
+            pointTxt.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            pointTxt.setText(baris.get(5).toString()); // Point
+            tabelBaris.addView(pointTxt);
+
             tabel4data.addView(tabelBaris);
         }
     }
